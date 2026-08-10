@@ -1,0 +1,45 @@
+:root{--sona-magenta:#ff2bd6;--sona-violet:#8065ff;--sona-silver:#f5f2f8}
+/* Final visual direction */
+.app{max-width:760px;background:radial-gradient(circle at 50% 8%,rgba(126,73,255,.08),transparent 28rem),#050507}
+.topbar{position:relative;justify-content:flex-end;padding:20px 22px 0;background:transparent}
+.brand{position:absolute;left:50%;top:18px;transform:translateX(-50%);display:flex;flex-direction:column;gap:3px;align-items:center;text-align:center}
+.brand .logo{width:62px;height:70px;border-radius:0;background:none;box-shadow:none;display:block;font-size:0;position:relative}
+.brand .logo svg{width:100%;height:100%;display:block;filter:drop-shadow(0 0 12px rgba(255,39,199,.28))}
+.brand b{font-size:10px;line-height:1;letter-spacing:.48em;font-weight:400;margin-left:.48em;color:#eeeaf2}
+.brand small{display:none}
+.topbar .circle{width:40px;height:40px;background:rgba(10,10,15,.5)}
+.hero{padding:132px 28px 34px;display:block;text-align:center}
+.hero>div{display:flex;flex-direction:column;align-items:center}
+.eyebrow{font-size:10px;letter-spacing:.22em;color:#8b8495;font-weight:500}
+.hero .eyebrow{font-size:11px;letter-spacing:.25em;color:#a39bab}
+.hero h1,.hero p{font-size:13px;line-height:1.9;letter-spacing:.27em;text-transform:uppercase;font-weight:300;color:#a9a1b0;margin:12px 0 0;max-width:none}
+.hero h1{margin:0;background:none;color:#aaa2b2;-webkit-text-fill-color:initial}
+.hero p{margin:0;color:#aaa2b2}
+.live{position:absolute;right:22px;top:20px;padding:8px 11px;font-size:9px}
+.search{padding:0 28px 14px}
+.searchbox{height:54px;border-radius:20px;background:rgba(14,14,20,.78);border-color:rgba(255,255,255,.11)}
+.filterline{padding-top:12px;gap:9px}
+.chip{padding:9px 15px;font-size:11px;background:transparent;border-color:rgba(255,255,255,.12);color:#b7b0bd}
+.map-card{height:auto;min-height:570px;margin:8px 24px 0;border-radius:28px;display:grid;grid-template-columns:minmax(0,1fr) 205px;overflow:hidden;background:linear-gradient(135deg,#08080d,#07070a);contain:layout paint}
+#map{height:570px;min-width:0}
+.map-top{top:18px;left:22px;right:22px;font-size:9px}
+.map-top span:first-child{display:none}
+.map-reset{top:18px!important;left:20px!important;background:transparent;border:0;padding:0;color:#eee;font-size:12px;font-weight:500}
+.map-reset.show{display:block}
+.map-card:has(.map-reset.show) .map-bottom{display:none}
+.map-bottom{display:none}
+.region-label,.city-label{display:none!important}
+.city-boundary{stroke:#393341!important;stroke-width:.65!important;fill:transparent!important;fill-opacity:0!important}
+.region{fill:#111017;fill-opacity:.9;stroke:#4b4456;stroke-width:1.1}
+.region:hover{fill:#17131d;stroke:#8e79ff}
+.region.selected{fill:#1a1520;stroke:#ff35d7;filter:none}
+.region-list{border-left:1px solid rgba(255,255,255,.08);padding:54px 18px 18px;overflow:auto;max-height:570px;background:rgba(5,5,9,.36)}
+.region-list-title{font-size:11px;letter-spacing:.18em;color:#8e8795;margin:0 0 12px;font-weight:700}
+.region-item{display:flex;align-items:center;justify-content:space-between;width:100%;padding:9px 0;border:0;border-bottom:1px solid rgba(255,255,255,.075);background:none;color:#d8d3dc;text-align:left;font-size:11px}
+.region-item span:last-child{color:#686170;font-size:15px;line-height:1}
+.region-item:hover{color:#fff}
+.near{padding:28px 28px 0}
+.join{margin:24px 28px 0}
+footer{padding-left:28px;padding-right:28px}
+@media(max-width:699px){.app{max-width:560px}.map-card{grid-template-columns:1fr;min-height:0}.map-card #map{height:500px}.region-list{border-left:0;border-top:1px solid rgba(255,255,255,.08);max-height:260px;padding:20px 22px}.region-list-title{margin-bottom:8px}.region-item{padding:8px 0}.hero{padding-left:22px;padding-right:22px}.search{padding-left:22px;padding-right:22px}.map-card{margin-left:16px;margin-right:16px}.near{padding-left:22px;padding-right:22px}.join{margin-left:22px;margin-right:22px}}
+@media(min-width:700px){body{padding:20px}.app{border:1px solid rgba(255,255,255,.08);border-radius:32px;overflow:hidden;box-shadow:0 30px 100px #000}}
