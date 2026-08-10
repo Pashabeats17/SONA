@@ -33,7 +33,32 @@ const categoryState=new Set();
 const genreState=new Set();
 
 const regionCentroids={'PIEMONTE':[45.05,7.65],'VALLE D\'AOSTA':[45.74,7.31],'LOMBARDIA':[45.5,9.9],'TRENTINO-ALTO ADIGE':[46.1,11.25],'VENETO':[45.55,11.85],'FRIULI-VENEZIA GIULIA':[46.1,13.15],'LIGURIA':[44.25,8.95],'EMILIA-ROMAGNA':[44.55,11.1],'TOSCANA':[43.4,11.0],'UMBRIA':[43.05,12.45],'MARCHE':[43.3,13.0],'LAZIO':[41.85,12.9],'ABRUZZO':[42.25,13.8],'MOLISE':[41.7,14.5],'CAMPANIA':[40.9,14.9],'PUGLIA':[41.0,16.0],'BASILICATA':[40.45,16.0],'CALABRIA':[39.05,16.3],'SICILIA':[37.6,14.1],'SARDEGNA':[40.0,9.0]};
-function norm(s){return String(s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/’/g,"'");}
+
+// Solo le città principali: massimo 7 confini visibili per regione, per mantenere la mappa pulita e veloce.
+const IMPORTANT_CITIES={
+ 'PIEMONTE':['Torino','Novara','Alessandria','Asti','Cuneo','Biella','Vercelli'],
+ 'VALLE D\'AOSTA':['Aosta'],
+ 'LOMBARDIA':['Milano','Brescia','Bergamo','Monza','Como','Pavia','Varese'],
+ 'TRENTINO-ALTO ADIGE':['Trento','Bolzano','Rovereto','Merano','Bressanone','Riva del Garda','Brunico'],
+ 'VENETO':['Venezia','Verona','Padova','Vicenza','Treviso','Rovigo','Belluno'],
+ 'FRIULI-VENEZIA GIULIA':['Trieste','Udine','Pordenone','Gorizia','Monfalcone','Grado','Lignano Sabbiadoro'],
+ 'LIGURIA':['Genova','La Spezia','Savona','Sanremo','Imperia','Rapallo','Chiavari'],
+ 'EMILIA-ROMAGNA':['Bologna','Parma','Modena','Reggio Emilia','Ravenna','Rimini','Ferrara'],
+ 'TOSCANA':['Firenze','Prato','Livorno','Pisa','Lucca','Arezzo','Siena'],
+ 'UMBRIA':['Perugia','Terni','Foligno','Città di Castello','Spoleto','Gubbio','Assisi'],
+ 'MARCHE':['Ancona','Pesaro','Ascoli Piceno','Macerata','Fano','San Benedetto del Tronto','Civitanova Marche'],
+ 'LAZIO':['Roma','Latina','Viterbo','Frosinone','Rieti','Guidonia Montecelio','Civitavecchia'],
+ 'ABRUZZO':['L\'Aquila','Pescara','Teramo','Chieti','Avezzano','Vasto','Lanciano'],
+ 'MOLISE':['Campobasso','Termoli','Isernia','Venafro','Bojano'],
+ 'CAMPANIA':['Napoli','Salerno','Caserta','Benevento','Avellino','Pozzuoli','Giugliano in Campania'],
+ 'PUGLIA':['Bari','Lecce','Taranto','Foggia','Brindisi','Andria','Barletta'],
+ 'BASILICATA':['Potenza','Matera','Melfi','Policoro','Pisticci','Lauria','Rionero in Vulture'],
+ 'CALABRIA':['Catanzaro','Reggio di Calabria','Cosenza','Crotone','Vibo Valentia','Lamezia Terme','Corigliano-Rossano'],
+ 'SICILIA':['Palermo','Catania','Messina','Siracusa','Trapani','Agrigento','Ragusa'],
+ 'SARDEGNA':['Cagliari','Sassari','Olbia','Alghero','Nuoro','Oristano','Carbonia']
+};
+
+function norm(s){return String(s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/’/g,"'").trim();}
 function regionName(f){return f?.properties?.reg_name||f?.properties?.NOME_REG||f?.properties?.name||'Regione';}
 function regionCode(f){return Number(f?.properties?.reg_istat_code_num||f?.properties?.reg_istat_code||0)||null;}
 function genreButtons(expanded=false,profile=false){const visible=expanded?genres:genres.slice(0,6);const attr=profile?'data-profile="genre"':'data-group="genre"';return visible.map(x=>`<button class="chip" ${attr} data-value="${x}">${x}</button>`).join('')+(expanded?'':`<button class="chip more-chip" data-more="${profile?'profile':'filter'}">Altro</button>`);}
@@ -56,11 +81,29 @@ function renderProfiles(){
 function markerIcon(){return L.divIcon({className:'sonap',iconSize:[9,9],iconAnchor:[4.5,4.5]});}
 function addMarkers(){profiles.forEach(p=>L.marker([p.lat,p.lng],{icon:markerIcon(),keyboard:false}).addTo(map).bindTooltip(`<b>${p.name}</b><br>${p.type} · ${p.city}`,{className:'sona-tip',direction:'top',offset:[0,-7]}));}
 function styleRegion(){return{className:'region',weight:1.1,color:'#302c37',fillColor:'#0e0e14',fillOpacity:.96};}
-function styleCities(){return{className:'city-boundary',weight:.55,color:'#5f5868',fillColor:'#17121b',fillOpacity:.12};}
+function styleCities(){return{className:'city-boundary',weight:.8,color:'#655d72',fillColor:'#17121b',fillOpacity:.11};}
+function cityLabel(feature){const name=feature?.properties?.name||'';return L.marker(L.geoJSON(feature).getBounds().getCenter(),{interactive:false,icon:L.divIcon({className:'city-label',html:name,iconSize:[100,14],iconAnchor:[50,7]})});}
 function onRegion(feature,layer){const name=regionName(feature);layer.on({click:()=>zoomRegion(layer,name),mouseover:e=>e.target.setStyle({fillColor:'#17131d',color:'#7657ff'}),mouseout:e=>{if(e.target!==selectedRegion)e.target.setStyle(styleRegion(feature));}});const c=regionCentroids[norm(name)];if(c)L.marker(c,{interactive:false,icon:L.divIcon({className:'region-label',html:name.replace('TRENTINO-ALTO ADIGE','TRENTINO').replace('FRIULI-VENEZIA GIULIA','FRIULI').replace('EMILIA-ROMAGNA','EMILIA'),iconSize:[80,16],iconAnchor:[40,8]})}).addTo(map);}
-async function loadCitiesForRegion(code){if(!code||cityLoading||cityLoadedFor===code)return;cityLoading=true;try{const r=await fetch(MUNICIPALITIES_URL(code),{cache:'force-cache'});if(!r.ok)throw new Error('cities');const topo=await r.json();const objectName=Object.keys(topo.objects||{})[0];if(!objectName)throw new Error('cities-object');const geo=topojson.feature(topo,topo.objects[objectName]);cityLayer?.remove();cityLayer=L.geoJSON(geo,{style:styleCities,smoothFactor:1.1,interactive:false}).addTo(map);cityLayer.bringToFront();cityLoadedFor=code;}catch(e){}finally{cityLoading=false;}}
-function zoomRegion(layer,name){selectedRegion=layer;selectedRegionCode=regionCode(layer.feature);regionLayer.eachLayer(x=>x.setStyle(styleRegion(x.feature)));layer.setStyle({fillColor:'#1b1421',color:'#ff27c7',weight:1.7});map.fitBounds(layer.getBounds(),{padding:[30,30],maxZoom:7.75,duration:.7});$('#mapTitle').textContent=name;$('#mapSub').textContent='Città delineate · zooma per esplorare';$('#reset').classList.add('show');loadCitiesForRegion(selectedRegionCode);}
-function resetMap(){selectedRegion=null;selectedRegionCode=null;cityLoadedFor=null;cityLayer?.remove();cityLayer=null;regionLayer?.eachLayer(l=>l.setStyle(styleRegion(l.feature)));map.flyTo(ITALY_CENTER,ITALY_MIN_ZOOM,{duration:.65});map.setMaxBounds(ITALY_BOUNDS);$('#mapTitle').textContent='Tutta Italia';$('#mapSub').textContent='Tocca una regione per entrare';$('#reset').classList.remove('show');}
+async function loadCitiesForRegion(code){
+  if(!code||cityLoading||cityLoadedFor===code)return;
+  cityLoading=true;
+  try{
+    const r=await fetch(MUNICIPALITIES_URL(code),{cache:'force-cache'});if(!r.ok)throw new Error('cities');
+    const topo=await r.json();const objectName=Object.keys(topo.objects||{})[0];if(!objectName)throw new Error('cities-object');
+    const geo=topojson.feature(topo,topo.objects[objectName]);
+    const regionKey=norm(geo.features?.[0]?.properties?.reg_name||'');
+    const wanted=(IMPORTANT_CITIES[regionKey]||[]).map(norm);
+    const matches=geo.features.filter(f=>wanted.includes(norm(f.properties?.name))).slice(0,7);
+    cityLayer?.remove();
+    cityLayer=L.geoJSON({type:'FeatureCollection',features:matches},{style:styleCities,smoothFactor:.8,interactive:false}).addTo(map);
+    matches.forEach(f=>cityLabel(f).addTo(map));
+    cityLayer.bringToFront();
+    cityLoadedFor=code;
+  }catch(e){}
+  finally{cityLoading=false;}
+}
+function zoomRegion(layer,name){selectedRegion=layer;selectedRegionCode=regionCode(layer.feature);regionLayer.eachLayer(x=>x.setStyle(styleRegion(x.feature)));layer.setStyle({fillColor:'#1b1421',color:'#ff27c7',weight:1.7});map.fitBounds(layer.getBounds(),{padding:[30,30],maxZoom:7.75,duration:.7});$('#mapTitle').textContent=name;$('#mapSub').textContent='Città principali · max 7';$('#reset').classList.add('show');loadCitiesForRegion(selectedRegionCode);}
+function resetMap(){selectedRegion=null;selectedRegionCode=null;cityLoadedFor=null;cityLayer?.remove();cityLayer=null;$$('.city-label').forEach(x=>x.remove());regionLayer?.eachLayer(l=>l.setStyle(styleRegion(l.feature)));map.flyTo(ITALY_CENTER,ITALY_MIN_ZOOM,{duration:.65});map.setMaxBounds(ITALY_BOUNDS);$('#mapTitle').textContent='Tutta Italia';$('#mapSub').textContent='Tocca una regione per entrare';$('#reset').classList.remove('show');}
 async function loadRegions(){try{const r=await fetch(REGION_URL,{cache:'force-cache'});if(!r.ok)throw Error();const data=await r.json();regionLayer=L.geoJSON(data,{style:styleRegion,onEachFeature:onRegion,smoothFactor:1.5}).addTo(map);map.setMaxBounds(ITALY_BOUNDS);}catch(e){$('#mapTitle').textContent='Mappa offline';$('#mapSub').textContent='Ricarica per visualizzare i confini regionali';}}
 function locateUser(){if(!navigator.geolocation){alert('La posizione non è disponibile su questo browser.');return}navigator.geolocation.getCurrentPosition(pos=>{const ll=[pos.coords.latitude,pos.coords.longitude];locationMarker?.remove();locationCircle?.remove();locationMarker=L.marker(ll,{icon:markerIcon()}).addTo(map).bindTooltip('La tua zona',{className:'sona-tip'}).openTooltip();locationCircle=L.circle(ll,{radius:5000,color:'#ff27c7',weight:1,opacity:.45,fillColor:'#ff27c7',fillOpacity:.035}).addTo(map);map.flyTo(ll,Math.max(9,map.getZoom()),{duration:.8});$('#mapTitle').textContent='La tua zona';$('#mapSub').textContent='Raggio massimo 5 km';},()=>alert('Posizione non concessa. Puoi comunque cercare una città.'));}
 function openSheet(){const saved=JSON.parse(localStorage.getItem('sonaProfile')||'null');if(saved){$('#ig').value=saved.ig||'';$('#city').value=saved.city||'';$$('[data-profile]').forEach(b=>b.classList.toggle('selected',(b.dataset.profile==='cat'?saved.categories:saved.genres)?.includes(b.dataset.value)));}$('#sheet').classList.remove('hidden');}
