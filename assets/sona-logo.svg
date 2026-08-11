@@ -1,1 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 121"><image href="data:image/jpeg;base64,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" width="120" height="121" preserveAspectRatio="xMidYMid meet"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" fill="none">
+<defs>
+  <linearGradient id="metal" x1="105" y1="72" x2="315" y2="345" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#ffffff"/><stop offset=".28" stop-color="#d9d5df"/><stop offset=".58" stop-color="#8f8998"/><stop offset=".78" stop-color="#f2edf5"/><stop offset="1" stop-color="#ff2bd6"/>
+  </linearGradient>
+  <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<!-- neon contour / connection rings -->
+<g fill="none" stroke="#7d19a7" stroke-linecap="round">
+ <ellipse cx="210" cy="174" rx="172" ry="162" stroke-width="3" opacity=".28"/>
+ <ellipse cx="210" cy="174" rx="145" ry="136" stroke-width="3" opacity=".34"/>
+ <ellipse cx="210" cy="174" rx="118" ry="110" stroke-width="3" opacity=".42"/>
+ <ellipse cx="210" cy="174" rx="91" ry="84" stroke-width="3" opacity=".5"/>
+</g>
+<!-- metallic S path -->
+<path d="M302 83c-31-34-83-40-120-13-35 25-34 67 7 91l76 44c40 23 42 66 7 98-35 32-92 25-131-17" stroke="url(#metal)" stroke-width="43" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M112 300c32 39 94 47 136 14 38-29 35-72-8-95l-79-42c-39-21-42-64-8-94 34-30 86-24 124 14" stroke="url(#metal)" stroke-width="43" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M112 300c32 39 94 47 136 14" stroke="#ff2bd6" stroke-width="8" stroke-linecap="round" opacity=".9" filter="url(#glow)"/>
+<!-- central connection point -->
+<circle cx="210" cy="249" r="18" fill="#fff"/>
+<circle cx="210" cy="249" r="31" fill="#ff2bd6" opacity=".25" filter="url(#glow)"/>
+<circle cx="210" cy="249" r="12" fill="#ff9bea"/>
+<!-- wordmark is part of the logo -->
+<text x="210" y="386" text-anchor="middle" fill="#f3f0f5" font-family="Arial,Helvetica,sans-serif" font-size="42" font-weight="600" letter-spacing="12">SONA</text>
+<path d="M279 358l15 15-15 15-15-15z" fill="#ff2bd6" opacity=".95"/>
+</svg>
