@@ -4,38 +4,51 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050507">
-<meta name="description" content="SONA — trova producer, artisti, DJ, fonici, videomaker e studi musicali in Italia.">
-<title>SONA</title>
+<meta name="description" content="SONA — la mappa della scena musicale italiana.">
+<title>SONA — Italia</title>
 <link rel="preconnect" href="https://unpkg.com">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="styles.css?v=sona20260811-final1">
+<link rel="stylesheet" href="styles.css?v=sona20260811-home2">
 </head>
 <body>
 <div class="app">
 <header class="topbar">
-  <a class="brand" href="#" aria-label="SONA"><img src="assets/sona-logo.svg?v=6" alt="SONA"></a>
-  <button class="join" id="joinOpen">FATTI TROVARE</button>
+  <div class="country">SONA — ITALIA</div>
+  <a class="brand" href="#" aria-label="SONA"><img src="assets/sona-wordmark.svg?v=1" alt="SONA"></a>
+  <div class="live"><i></i> LIVE</div>
 </header>
-<section class="hero"><p>Sei sempre stato al posto giusto. Nessuno sapeva dove trovarti.</p></section>
-<section class="filters">
-  <input id="search" type="hidden" value="">
-  <div class="chips" id="categories"></div><div class="chips" id="genres"></div><div class="radius">AREA MAX 5 KM</div>
+<section class="hero"><p>Sei sempre stato al posto giusto. <span>Nessuno sapeva dove trovarti.</span></p></section>
+<section class="search-area">
+  <label class="search-box"><span>⌕</span><input id="search" type="search" autocomplete="off" placeholder="Cerca nome, città, genere…"><b>◎</b></label>
 </section>
-<div class="ad ad-top"><span>SPAZIO PARTNER</span><b>La tua pagina può essere qui.</b><small>Promozione discreta per la scena musicale italiana.</small></div>
+<section class="filters">
+  <div class="chips" id="categories"></div>
+  <div class="chips" id="genres"></div>
+  <div class="radius">AREA MAX 5 KM ⓘ</div>
+</section>
 <section class="map-layout">
-  <div class="map-wrap"><div id="map"></div><div class="map-status" id="mapStatus">Tutta Italia</div><button class="back" id="reset">← Italia</button></div>
+  <div class="map-wrap">
+    <div id="map"></div>
+    <div class="map-status" id="mapStatus">Tutta Italia</div>
+    <button class="back" id="reset">← Italia</button>
+  </div>
   <aside class="directory" id="regionDirectory"><div class="panel-kicker">REGIONI</div><div id="regionList"></div></aside>
   <aside class="cities hidden" id="citiesPanel"><div class="cities-head"><button id="citiesBack">← Regioni</button><div><span class="panel-kicker">REGIONE</span><h2 id="citiesTitle"></h2></div><span id="citiesCount"></span></div><div class="city-search"><span>⌕</span><input id="citySearch" placeholder="Cerca città…"></div><div id="citiesList"></div></aside>
 </section>
 <section class="profiles-section"><div class="section-head"><div><span class="panel-kicker">SONA</span><h2>Vicino a te</h2></div><span id="count">0</span></div><div id="profiles" class="profiles"></div></section>
-<div class="ad ad-bottom"><span>SPAZIO PARTNER</span><b>Promuovi qui la tua realtà.</b><small>In futuro disponibile per pagine, studi, eventi e brand musicali.</small></div>
-<section class="events-preview"><div><span class="panel-kicker">SONA EVENTS</span><h2>Eventi</h2><p>Raduni e incontri della scena musicale italiana.</p></div><button id="eventsOpen">Vedi tutti →</button><div id="eventsPreviewList" class="events-grid"></div></section>
-<footer><span>SONA</span><small>Posizione sempre approssimata · Italia</small></footer>
+<div class="ad ad-bottom"><span>SPAZIO PUBBLICITARIO DISPONIBILE</span><b>Promuovi la tua pagina o il tuo progetto su SONA</b><button>SCOPRI DI PIÙ</button></div>
+<nav class="bottom-nav" aria-label="Navigazione principale">
+  <button class="nav-item active" data-tab="map"><span>⌖</span><small>Mappa</small></button>
+  <button class="nav-item" id="eventsOpen" data-tab="events"><span>□</span><small>Eventi</small></button>
+  <button class="nav-logo" aria-label="SONA"><img src="assets/sona-app-icon.svg?v=1" alt="SONA"></button>
+  <button class="nav-item" data-tab="favorites"><span>♡</span><small>Preferiti</small></button>
+  <button class="nav-item" id="joinOpen" data-tab="profile"><span>♙</span><small>Profilo</small></button>
+</nav>
 </div>
 <aside class="events-panel" id="eventsPanel"><div class="events-head"><button id="eventsClose">×</button><div><span class="panel-kicker">SONA EVENTS</span><h2>Eventi</h2></div><span id="eventsLocation">Toscana</span></div><div class="event-tools"><button class="event-filter active" data-region="Toscana">Vicino a te</button><button class="event-filter" data-region="Italia">Tutta Italia</button><input id="eventSearch" placeholder="Cerca raduni, città…"></div><div id="eventsList"></div></aside>
-<div class="overlay hidden" id="sheet"><div class="sheet"><button class="close" id="closeSheet">×</button><span class="panel-kicker">PROFILO SONA</span><h2>Fatti trovare</h2><p>Collega il tuo Instagram, scegli la tua zona e mostra alla scena musicale italiana chi sei e cosa fai.</p><button class="instagram" id="connectInstagram">◎ CONNETTI INSTAGRAM</button><div class="note" id="connectNote">Il collegamento reale verrà completato con l'autenticazione ufficiale Instagram/Meta.</div><label>Instagram<input id="ig" placeholder="@pashabeats"></label><label>Città / zona<input id="city" placeholder="Firenze"></label><div class="label">Categorie <small>max 3</small></div><div class="selects" id="profileCats"></div><div class="label">Generi <small>max 3</small></div><div class="selects" id="profileGenres"></div><div class="radius-choice">Raggio pubblico <b>5 km</b><small>La posizione precisa non viene mostrata.</small></div><button class="primary" id="save">PUBBLICA IL MIO PROFILO</button></div></div>
+<div class="overlay hidden" id="sheet"><div class="sheet"><button class="close" id="closeSheet">×</button><span class="panel-kicker">PROFILO SONA</span><h2>Mettiti in mappa</h2><p>Collega il tuo Instagram, scegli la tua zona e mostra alla scena musicale italiana chi sei e cosa fai.</p><button class="instagram" id="connectInstagram">◎ CONNETTI INSTAGRAM</button><div class="note" id="connectNote">Il collegamento reale verrà completato con l'autenticazione ufficiale Instagram/Meta.</div><label>Instagram<input id="ig" placeholder="@pashabeats"></label><label>Città / zona<input id="city" placeholder="Firenze"></label><div class="label">Categorie <small>max 3</small></div><div class="selects" id="profileCats"></div><div class="label">Generi <small>max 3</small></div><div class="selects" id="profileGenres"></div><div class="radius-choice">Raggio pubblico <b>5 km</b><small>La posizione precisa non viene mostrata.</small></div><button class="primary" id="save">PUBBLICA IL MIO PROFILO</button></div></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
-<script src="app.js?v=sona20260811-mapclean4" defer></script>
+<script src="app.js?v=sona20260811-home2" defer></script>
 <script src="spotify.js?v=sona20260811" defer></script>
 </body>
 </html>
