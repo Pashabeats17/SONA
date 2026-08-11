@@ -99,16 +99,19 @@ function App() {
             const region = regions.find((item) => item.name.toLowerCase() === name.toLowerCase())
             if (!region) return
 
+            const pathLayer = featureLayer as L.Path
+            const boundsLayer = featureLayer as L.Polygon
+
             featureLayer.on({
               mouseover: () => {
-                featureLayer.setStyle({ color: '#36f7ff', weight: 2.5, fillColor: '#0b1012', fillOpacity: 0.98 })
+                pathLayer.setStyle({ color: '#36f7ff', weight: 2.5, fillColor: '#0b1012', fillOpacity: 0.98 })
               },
               mouseout: () => {
-                featureLayer.setStyle({ color: '#ff2bd6', weight: 1.5, fillColor: '#050505', fillOpacity: 0.96 })
+                pathLayer.setStyle({ color: '#ff2bd6', weight: 1.5, fillColor: '#050505', fillOpacity: 0.96 })
               },
               click: () => {
                 setSelectedRegion(region)
-                map.fitBounds(featureLayer.getBounds(), { padding: [35, 35], maxZoom: region.zoom })
+                map.fitBounds(boundsLayer.getBounds(), { padding: [35, 35], maxZoom: region.zoom })
               },
             })
           },
