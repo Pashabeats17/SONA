@@ -8,21 +8,16 @@
 <title>SONA</title>
 <link rel="preconnect" href="https://unpkg.com">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="styles.css?v=sona20260811-spotify">
+<link rel="stylesheet" href="styles.css?v=sona20260811-mapclean3">
 </head>
 <body>
 <div class="app">
 <header class="topbar">
   <a class="brand" href="#" aria-label="SONA"><img src="assets/sona-logo.svg?v=3" alt=""><span>SONA</span></a>
-  <button class="join" id="joinOpen">ENTRA IN SONA</button>
+  <button class="join" id="joinOpen">FATTI TROVARE</button>
 </header>
 <section class="hero"><p>Sei sempre stato al posto giusto. Nessuno sapeva dove trovarti.</p></section>
-<section class="search-area">
-  <div class="searchbox"><span>⌕</span><input id="search" placeholder="Cerca nome, città, genere…" autocomplete="off"><button id="locate" aria-label="Trova vicino a me">⌖</button></div>
-  <div class="chips" id="categories"></div>
-  <div class="chips" id="genres"></div>
-  <div class="radius">AREA MAX 5 KM</div>
-</section>
+<section class="filters"><div class="chips" id="categories"></div><div class="chips" id="genres"></div><div class="radius">AREA MAX 5 KM</div></section>
 <div class="ad ad-top"><span>SPAZIO PARTNER</span><b>La tua pagina può essere qui.</b><small>Promozione discreta per la scena musicale italiana.</small></div>
 <section class="map-layout">
   <div class="map-wrap"><div id="map"></div><div class="map-status" id="mapStatus">Tutta Italia</div><button class="back" id="reset">← Italia</button></div>
@@ -35,9 +30,9 @@
 <footer><span>SONA</span><small>Posizione sempre approssimata · Italia</small></footer>
 </div>
 <aside class="events-panel" id="eventsPanel"><div class="events-head"><button id="eventsClose">×</button><div><span class="panel-kicker">SONA EVENTS</span><h2>Eventi</h2></div><span id="eventsLocation">Toscana</span></div><div class="event-tools"><button class="event-filter active" data-region="Toscana">Vicino a te</button><button class="event-filter" data-region="Italia">Tutta Italia</button><input id="eventSearch" placeholder="Cerca raduni, città…"></div><div id="eventsList"></div></aside>
-<div class="overlay hidden" id="sheet"><div class="sheet"><button class="close" id="closeSheet">×</button><span class="panel-kicker">IL TUO PROFILO</span><h2>Entra in SONA</h2><p>Collega il tuo Instagram, scegli la tua zona e fatti trovare nella scena musicale italiana.</p><button class="instagram" id="connectInstagram">◎ CONNETTI INSTAGRAM</button><div class="note" id="connectNote">Il collegamento reale verrà completato con l'autenticazione ufficiale Instagram/Meta.</div><label>Instagram<input id="ig" placeholder="@pashabeats"></label><label>Città / zona<input id="city" placeholder="Firenze"></label><div class="label">Categorie <small>max 3</small></div><div class="selects" id="profileCats"></div><div class="label">Generi <small>max 3</small></div><div class="selects" id="profileGenres"></div><div class="radius-choice">Raggio pubblico <b>5 km</b><small>La posizione precisa non viene mostrata.</small></div><button class="primary" id="save">SALVA PROFILO</button></div></div>
+<div class="overlay hidden" id="sheet"><div class="sheet"><button class="close" id="closeSheet">×</button><span class="panel-kicker">PROFILO SONA</span><h2>Fatti trovare</h2><p>Collega il tuo Instagram, scegli la tua zona e mostra alla scena musicale italiana chi sei e cosa fai.</p><button class="instagram" id="connectInstagram">◎ CONNETTI INSTAGRAM</button><div class="note" id="connectNote">Il collegamento reale verrà completato con l'autenticazione ufficiale Instagram/Meta.</div><label>Instagram<input id="ig" placeholder="@pashabeats"></label><label>Città / zona<input id="city" placeholder="Firenze"></label><div class="label">Categorie <small>max 3</small></div><div class="selects" id="profileCats"></div><div class="label">Generi <small>max 3</small></div><div class="selects" id="profileGenres"></div><div class="radius-choice">Raggio pubblico <b>5 km</b><small>La posizione precisa non viene mostrata.</small></div><button class="primary" id="save">PUBBLICA IL MIO PROFILO</button></div></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
-<script src="app.js?v=sona20260811-spotify" defer></script>
+<script src="app.js?v=sona20260811-mapclean3" defer></script>
 <script src="spotify.js?v=sona20260811" defer></script>
 </body>
 </html>
