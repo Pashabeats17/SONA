@@ -1,18 +1,24 @@
-# SONA
+# SONA+
 
-Mobile-first music map for Italy.
+SONA+ is the foundation of a map-first application for discovering the Italian music scene.
 
-## V1
-- Interactive Italy region map
-- Region tap + zoom
-- Nearby profiles and Instagram-only public contact
-- 5 km maximum public location radius
-- Category filters (max 3 in creator profile)
-- Genre filters (max 3 in creator profile)
-- Search by name, city, category and genre
-- Browser geolocation with a 5 km visual radius
-- Local profile persistence for demo purposes
-- iPhone-first dark/neon UI
+## Current foundation
 
-## Map data
-Regional boundaries use the Openpolis `geojson-italy` dataset, derived from ISTAT administrative boundaries and released under CC-BY. The production app should keep the required attribution when the data is bundled or served.
+- React 19 + TypeScript
+- Vite
+- Leaflet
+- Dark interface using matte black, white and grey tones
+- `sona+` brand link returns the map to Italy
+- Italy map with zoom limits
+- Region directory on desktop
+- Region selection from the directory
+- `Fatti trovare` entry point reserved for the future Instagram/Meta authentication flow
+- Advertising placeholder at the bottom of the page
+
+## Development direction
+
+The next planned map layer is:
+
+Italy → region → city → profiles
+
+Artist/profile markers, Instagram authentication, public profiles and SONA+ links will be added incrementally. No Instagram credentials or API behavior are faked in the current foundation.
