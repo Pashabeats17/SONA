@@ -1,66 +1,15 @@
-<!doctype html>
-<html lang="it">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#050507"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="description" content="SONA — trova producer, artisti, DJ, fonici, videomaker e studi musicali in Italia."><title>SONA — Italia</title>
-<link rel="preconnect" href="https://unpkg.com" crossorigin>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-<link rel="stylesheet" href="styles.css?v=20260811a">
-<link rel="stylesheet" href="ui-overrides.css?v=20260811a">
-</head>
-<body>
-<div class="app">
-<header class="topbar">
-  <div class="brand" aria-label="SONA">
-    <span class="logo" aria-hidden="true"><svg viewBox="0 0 80 88" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sonaG" x1="16" y1="10" x2="64" y2="78" gradientUnits="userSpaceOnUse"><stop stop-color="#F8F6FA"/><stop offset=".48" stop-color="#D9D2E4"/><stop offset="1" stop-color="#FF2BD6"/></linearGradient></defs><path d="M59 17C51 7 32 8 23 17C14 26 17 38 28 43L48 52C56 56 58 64 51 71C44 78 28 78 20 69" stroke="url(#sonaG)" stroke-width="9" stroke-linecap="round"/><path d="M21 70C28 81 47 82 57 72C66 63 62 51 52 46L31 36C23 32 22 24 29 18" stroke="url(#sonaG)" stroke-width="9" stroke-linecap="round"/><circle cx="40" cy="45" r="5.5" fill="#FF2BD6"/></svg></span>
-    <b>SONA</b>
-    <small>ITALIA</small>
-  </div>
-  <button class="circle" id="profileOpen" aria-label="Profilo">◎</button>
-</header>
-<section class="hero">
-  <div>
-    <span class="eyebrow">SONA — ITALIA</span>
-    <h1>Sei sempre stato al posto giusto.</h1>
-    <p>Nessuno sapeva dove trovarti.</p>
-  </div>
-  <span class="live"><i></i> LIVE</span>
-</section>
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#050507"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="description" content="SONA — trova producer, artisti, DJ, fonici, videomaker e studi musicali in Italia."><title>SONA</title><link rel="preconnect" href="https://unpkg.com" crossorigin><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin><link rel="stylesheet" href="styles.css?v=20260811b"></head><body><div class="app" id="app">
+<header class="topbar"><div class="brand"><img class="brand-logo" src="assets/sona-logo.svg" alt="SONA"><div class="brand-name">SONA<small>ITALIA</small></div></div><button class="circle" id="profileOpen" aria-label="Profilo">◎</button></header>
+<section class="hero"><div><span class="eyebrow">SONA — ITALIA</span><h1>Sei sempre stato al posto giusto.</h1><p>Nessuno sapeva dove trovarti.</p></div><span class="live"><i></i> LIVE</span></section>
 <section class="search"><div class="searchbox"><span>⌕</span><input id="search" placeholder="Cerca nome, città, genere…" autocomplete="off"><button id="locate" aria-label="Usa la mia posizione">◎</button></div><div class="filterline" id="categories"></div><div class="filterline" id="genres"></div></section>
-<section class="map-card">
-  <div id="map" aria-label="Mappa musicale dell'Italia"></div>
-  <div class="map-top"><span>ITALIA</span><span>AREA MAX 5 KM</span></div>
-  <button id="reset" class="map-reset">← Italia</button>
-  <div class="map-bottom"><b id="mapTitle">Tutta Italia</b><span id="mapSub">Tocca una regione per entrare</span></div>
-  <aside class="region-list" aria-label="Regioni italiane">
-    <div class="region-list-title">REGIONI</div>
-    <button class="region-item">Abruzzo <span>›</span></button>
-    <button class="region-item">Basilicata <span>›</span></button>
-    <button class="region-item">Calabria <span>›</span></button>
-    <button class="region-item">Campania <span>›</span></button>
-    <button class="region-item">Emilia-Romagna <span>›</span></button>
-    <button class="region-item">Friuli-Venezia Giulia <span>›</span></button>
-    <button class="region-item">Lazio <span>›</span></button>
-    <button class="region-item">Liguria <span>›</span></button>
-    <button class="region-item">Lombardia <span>›</span></button>
-    <button class="region-item">Marche <span>›</span></button>
-    <button class="region-item">Molise <span>›</span></button>
-    <button class="region-item">Piemonte <span>›</span></button>
-    <button class="region-item">Puglia <span>›</span></button>
-    <button class="region-item">Sardegna <span>›</span></button>
-    <button class="region-item">Sicilia <span>›</span></button>
-    <button class="region-item">Toscana <span>›</span></button>
-    <button class="region-item">Trentino-Alto Adige <span>›</span></button>
-    <button class="region-item">Umbria <span>›</span></button>
-    <button class="region-item">Valle d’Aosta <span>›</span></button>
-    <button class="region-item">Veneto <span>›</span></button>
-  </aside>
-</section>
+<div class="ad-slot ad-top"><span>SPAZIO PARTNER</span><b>La tua pagina musicale potrebbe essere qui.</b><small>Uno spazio discreto per realtà della scena italiana.</small></div>
+<section class="map-card"><div id="map" aria-label="Mappa musicale dell'Italia"></div><div class="map-top"><span>ITALIA</span><span>AREA MAX 5 KM</span></div><button id="reset" class="map-reset">← Italia</button><div class="map-bottom"><b id="mapTitle">Tutta Italia</b><span id="mapSub">Tocca una regione per entrare</span></div><aside class="region-list" id="regionList" aria-label="Regioni italiane"></aside></section>
+<section class="cities-panel hidden" id="citiesPanel"><div class="cities-head"><button id="citiesBack">← Regioni</button><div><span class="eyebrow">REGIONE</span><h2 id="citiesTitle">Toscana</h2></div><span id="citiesCount"></span></div><div class="city-search"><span>⌕</span><input id="citySearch" placeholder="Cerca una città…"></div><div class="cities-list" id="citiesList"></div></section>
 <section class="near"><div class="section-title"><div><span class="eyebrow">DISCOVER</span><h2>Vicino a te</h2></div><span id="count">0</span></div><div id="profiles" class="profiles"></div></section>
+<div class="ad-slot ad-bottom"><span>SPAZIO PARTNER</span><b>Promuovi qui la tua realtà.</b><small>In futuro disponibile per pagine, studi, eventi e brand musicali.</small></div>
 <section class="join"><div><span class="eyebrow">CREATOR MODE</span><h2>Metti il tuo nome<br>nella mappa.</h2><p>Connetti Instagram, scegli la tua zona entro 5 km e fatti trovare dalla scena musicale italiana.</p></div><button id="joinOpen">ENTRA</button></section>
-<footer><span>SONA · ITALIA</span><span>Posizione sempre approssimata</span></footer>
-</div>
-<div id="sheet" class="overlay hidden"><div class="sheet"><button id="closeSheet" class="close" aria-label="Chiudi">×</button><span class="eyebrow">IL TUO PROFILO</span><h2>Entra in SONA</h2><p class="sheetintro">Connetti Instagram, scegli fino a 3 categorie e 3 generi. Pubblicheremo solo Instagram e una zona entro 5 km.</p><label>Instagram<input id="ig" placeholder="@pashabeats"></label><label>Zona / città<input id="city" placeholder="Firenze"></label><div class="label">Categorie <small>max 3</small></div><div class="selectgrid" id="profileCats"></div><div class="label">Generi <small>max 3</small></div><div class="selectgrid" id="profileGenres"></div><button id="save" class="primary">SALVA PROFILO</button></div></div>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="" defer></script>
-<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" crossorigin="" defer></script>
-<script src="app.js?v=20260811a" defer></script>
-</body></html>
+<footer><span>SONA · ITALIA</span><span>Posizione sempre approssimata</span></footer></div>
+<div class="swipe-hint" id="swipeHint">← Scorri a destra per gli eventi</div>
+<aside class="events-panel" id="eventsPanel" aria-hidden="true"><div class="events-head"><button id="eventsClose">×</button><div><span class="eyebrow">SONA EVENTS</span><h2>Eventi</h2></div><span class="events-location" id="eventsLocation">Toscana</span></div><div class="events-tools"><button class="event-filter active" data-region="Toscana">Vicino a te</button><button class="event-filter" data-region="Italia">Tutta Italia</button><input id="eventSearch" placeholder="Cerca raduni, città…"></div><div id="eventsList" class="events-list"></div></aside>
+<div id="sheet" class="overlay hidden"><div class="sheet"><button id="closeSheet" class="close">×</button><span class="eyebrow">IL TUO PROFILO</span><h2>Entra in SONA</h2><p class="sheetintro">Collega Instagram, scegli la tua zona e fatti trovare. Il tuo indirizzo preciso non viene pubblicato.</p><button id="connectInstagram" class="instagram-connect">◎ CONNETTI INSTAGRAM</button><div class="connect-note" id="connectNote">Per la connessione reale verrà usata l'autenticazione ufficiale Instagram/Meta.</div><label>Username Instagram<input id="ig" placeholder="@pashabeats"></label><label>Zona / città<input id="city" placeholder="Firenze"></label><div class="label">Categorie <small>max 3</small></div><div class="selectgrid" id="profileCats"></div><div class="label">Generi <small>max 3</small></div><div class="selectgrid" id="profileGenres"></div><button id="save" class="primary">SALVA PROFILO</button></div></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin defer></script><script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" crossorigin defer></script><script src="app.js?v=20260811b" defer></script></body></html>
